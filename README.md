@@ -5,4 +5,4 @@ Greets new comers and performs other functions for HSO Slack team chat.
 ```greeting.txt``` contains the text sent to new users. It's modified with ```format``` to include the user's username and the bot's name.
 
 # Dependencies
-```python-slackclient```.
+* ```python-slackclient```
