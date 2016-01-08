@@ -81,7 +81,7 @@ class Aurora(SlackClient):
         try:
             path = os.path.dirname(os.path.realpath(__file__)) + "/greeting.txt"
             paragraph = open(path).read().format(username, self.name)
-            self.rtm_send_message(event['channel'], paragraph) 
+            self.rtm_send_message(event['user']['name'], paragraph) 
 
         except FileNotFoundError:
             print("Greeting file not found! {}".format(path))
