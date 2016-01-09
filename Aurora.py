@@ -75,7 +75,7 @@ class Bot(Slacker):
 
         """
 
-        self.chat.post_message(channel, "<3 This bot loves you <3", as_user=True)
+        self.chat.post_message(channel, "This bot loves you <3", as_user=True)
 
     def run(self):
 
