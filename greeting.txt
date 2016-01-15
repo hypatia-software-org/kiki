@@ -1,4 +1,4 @@
-Hello @{} and welcome to the official Hypatia Software Organization Slack team! I'm {}, your helpful bot. If you haven't already filled out the Intake form (https://goo.gl/AdbLIo), please do so now! Providing us with correct info assures that we can efficiently tend to you. Your submissions to this form are able to be revised any number of times.
+Hello and welcome to the official Hypatia Software Organization Slack team! I'm Aurora, your helpful bot. If you haven't already filled out the Intake form (https://goo.gl/AdbLIo), please do so now! Providing us with correct info assures that we can efficiently tend to you. Your submissions to this form are able to be revised any number of times.
 
 Once you're done with that, please take a minute to review our Code of Conduct (http://goo.gl/oPyxM8). We take these rules very seriously, so it is important that you understand and follow them. If you are unsure of any of our rules, please ask in #general. If you notice someone violating these rules and/or making anyone uncomfortable, send an email to abuse@hypatia.software and we will look into it.
 

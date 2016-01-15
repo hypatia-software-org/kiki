@@ -67,15 +67,20 @@ class Bot(Slacker):
         callback(channel.body["channel"]["id"])
         self.im.close(channel.body["channel"]["id"])
 
-    def send_test(self, channel):
-        """Send the string 'test' to a channel.
+    def send_greeting(self, channel):
+        """Send the new member greeting in greeting.txt to the user.
 
         Args:
             channel (str): Channel to send to.
 
         """
+        try:
+            
+            with open("greeting.txt", "r") as greeting:
+                self.chat.post_message(channel, greeting.read(), as_user=True)
 
-        self.chat.post_message(channel, "This bot loves you <3", as_user=True)
+        except FileNotFoundError:
+            print("Greeting file not found!")
 
     def run(self):
 
@@ -91,7 +96,7 @@ class Bot(Slacker):
             else:
 
                 for user in (users ^ self.userlist):
-                    self.with_channel(user, self.send_test)
+                    self.with_channel(user, self.send_greeting)
                     print("Learning {}...".format(user))
                     self.learn_users(users ^ self.userlist)
                
