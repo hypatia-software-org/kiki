@@ -83,25 +83,30 @@ class Bot(Slacker):
             print("Greeting file not found!")
 
     def run(self):
+        try:
+            while True:
+                response = self.users.list()
+                users = set(user["id"] for user in response.body["members"])
 
-        while True:
-            response = self.users.list()
-            users = set(user["id"] for user in response.body["members"])
+                if not self.userlist:
+                    print("No users defined. Learning users.")
+                    self.learn_users(users)
+                    print("Done.")
 
-            if not self.userlist:
-                print("No users defined. Learning users.")
-                self.learn_users(users)
-                print("Done.")
+                else:
 
+                    for user in (users ^ self.userlist):
+                        self.with_channel(user, self.send_greeting)
+                        print("Learning {}...".format(user))
+                        self.learn_users(users ^ self.userlist)
+                   
+                self.userlist = users
+                sleep(1)
+        except requests.exceptions.HTTPError as e:
+            if e.status_code == 504:
+                pass
             else:
-
-                for user in (users ^ self.userlist):
-                    self.with_channel(user, self.send_greeting)
-                    print("Learning {}...".format(user))
-                    self.learn_users(users ^ self.userlist)
-               
-            self.userlist = users
-            sleep(1)
+                raise e
 
 
 if __name__ == "__main__":
