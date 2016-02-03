@@ -1,5 +1,6 @@
 from slacker import *
 from time import sleep
+import requests
 
 try:
     import configparser
