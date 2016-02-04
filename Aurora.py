@@ -104,7 +104,7 @@ class Bot(Slacker):
                 self.userlist = users
                 sleep(1)
         except requests.exceptions.HTTPError as e:
-            if e.status_code == 504:
+            if e.response.status_code == 504:
                 pass
             else:
                 raise e
