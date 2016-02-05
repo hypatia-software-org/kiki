@@ -34,7 +34,7 @@ class Bot(Slacker):
 
                 return set(uid.strip() for uid in userlist.readlines())
 
-        except FileNotFoundError:
+        except IOError:
             print("File not found... using empty userlist.")
 
             return set()
