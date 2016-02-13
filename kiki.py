@@ -1,3 +1,18 @@
+"""Kiki: Simple Slack Greet Bot
+
+Kiki is a Python Slack bot which simply
+greets people who are new to your team.
+
+Kiki will make a file in her directory
+called `userlist`, she has a bad memory,
+so she uses this to keep track of everyone,
+to make sure she doesn't forget them.
+
+Kiki is named after Kiki from
+Kiki's Delivery Service!
+
+"""
+
 from slacker import *
 from time import sleep
 import requests
