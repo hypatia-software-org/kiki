@@ -62,11 +62,33 @@ class Bot(Slacker):
             uid (str): User ID to open a channel for.
             callback (function): Function to pass the channel ID to.
 
+        Returns:
+            bool: True if able to open IM session, False if unable
+                to open session, e.g., user is disabled.
+
+        Raises:
+            slacker.Error: Raises an error if a user cannot be
+                messaged, and it's for a reason beyond their
+                account being disabled.
+
         """
 
-        channel = self.im.open(uid)
-        callback(channel.body["channel"]["id"])
-        self.im.close(channel.body["channel"]["id"])
+        try:
+            channel = self.im.open(uid)
+            callback(channel.body["channel"]["id"])
+            self.im.close(channel.body["channel"]["id"])
+
+            return True
+
+        except slacker.Error as e:
+
+            if e.message == "user_disabled":
+
+                return False
+
+            else:
+
+                raise slacker.Error
 
     def send_greeting(self, channel):
         """Send the new member greeting in greeting.txt to the user.
