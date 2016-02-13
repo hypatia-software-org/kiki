@@ -69,7 +69,7 @@ class Bot(Slacker):
         Raises:
             slacker.Error: Raises an error if a user cannot be
                 messaged, and it's for a reason beyond their
-                account being disabled.
+                account being disabled or being a bot.
 
         """
 
@@ -82,7 +82,7 @@ class Bot(Slacker):
 
         except Error as e:
 
-            if e.message == "user_disabled":
+            if e.message in ("user_disabled", "cannot_dm_bot"):
 
                 return False
 
@@ -105,7 +105,10 @@ class Bot(Slacker):
         except FileNotFoundError:
             print("Greeting file not found!")
 
+    # NOTES: YIKES! REFACTOR!!!
+    # We need to start using more decorators.
     def run(self):
+
         try:
             while True:
                 response = self.users.list()
@@ -119,16 +122,22 @@ class Bot(Slacker):
                 else:
 
                     for user in (users ^ self.userlist):
-                        self.with_channel(user, self.send_greeting)
-                        print("Learning {}...".format(user))
-                        self.learn_users(users ^ self.userlist)
+
+                        if self.with_channel(user, self.send_greeting):
+                            print("Learning {}...".format(user))
+                            self.learn_users(users ^ self.userlist)
                    
                 self.userlist = users
                 sleep(1)
+
         except requests.exceptions.HTTPError as e:
+
             if e.response.status_code == 504:
+
                 pass
+
             else:
+
                 raise e
 
 
