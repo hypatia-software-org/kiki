@@ -80,7 +80,7 @@ class Bot(Slacker):
 
             return True
 
-        except slacker.Error as e:
+        except Error as e:
 
             if e.message == "user_disabled":
 
@@ -88,7 +88,7 @@ class Bot(Slacker):
 
             else:
 
-                raise slacker.Error
+                raise e
 
     def send_greeting(self, channel):
         """Send the new member greeting in greeting.txt to the user.
